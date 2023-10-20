@@ -33,10 +33,6 @@ jobs:
           workspace: 'vulnerable-ec2'
           token: ${{ secrets.TFC_API_TOKEN }}
 
-      - name: Print sarif results
-        id: output
-        run: cat results.sarif snyk.sarif 2>/dev/null
-      
       - name: Upload SARIF file to GitHub UI
         uses: github/codeql-action/upload-sarif@v1
         with:
