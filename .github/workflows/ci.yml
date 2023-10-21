@@ -33,7 +33,10 @@ jobs:
           workspace: 'vulnerable-ec2'
           token: ${{ secrets.TFC_API_TOKEN }}
 
-      - run: ls -als
+      - run: |
+          ls -als
+          cat results.sarif
+          cat terraform-scanner-runtask-action.log 
 
       - name: Upload SARIF file to GitHub UI
         uses: github/codeql-action/upload-sarif@v2
