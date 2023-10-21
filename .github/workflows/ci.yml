@@ -9,6 +9,7 @@ on:
 
 jobs:
 
+  permissions: write-all
   scan-terraform:
     name: Scan Terraform
     runs-on: ubuntu-latest
