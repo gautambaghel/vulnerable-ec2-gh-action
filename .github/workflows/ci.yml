@@ -26,6 +26,7 @@ jobs:
           ngrok_authtoken: ${{ secrets.NGROK_TOKEN }}
 
       - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+        name: Run Terraform Workspace
         id: run
         continue-on-error: true
         with:
@@ -34,12 +35,10 @@ jobs:
           workspace: 'vulnerable-ec2'
           token: ${{ secrets.TFC_API_TOKEN }}
 
-      - run: |
-          ls -als
-          cat results.sarif
-          cat terraform-scanner-runtask-action.log 
+      - run: cat terraform-scanner-runtask-action.log
+        name: Scan log results
 
-      - name: Upload SARIF file to GitHub UI
+      - name: Upload scan results to GitHub UI
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
