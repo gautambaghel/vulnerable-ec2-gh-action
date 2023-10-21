@@ -19,14 +19,14 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Scan Terraform
-        uses: gautambaghel/sarif-to-terraform-runtask@1.0.0-beta
+      - name: Terraform scanner run task
+        uses: gautambaghel/terraform-scanner-runtask-action@1.0.0-beta
         with:
           ngrok_domain: ${{ secrets.NGROK_DOMAIN }}
           ngrok_authtoken: ${{ secrets.NGROK_TOKEN }}
 
       - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
-        name: Run Terraform Workspace
+        name: Run Terraform plan
         id: run
         continue-on-error: true
         with:
@@ -36,7 +36,7 @@ jobs:
           token: ${{ secrets.TFC_API_TOKEN }}
 
       - run: cat terraform-scanner-runtask-action.log
-        name: Scan log results
+        name: Scan results output
 
       - name: Upload scan results to GitHub UI
         uses: github/codeql-action/upload-sarif@v2
