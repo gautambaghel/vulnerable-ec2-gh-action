@@ -100,8 +100,8 @@ resource "aws_instance" "ec2" {
 #  key_name = "mam-workshop-keypair"
 
   # WORKSHOP: uncomment the lines below to enable encrypted block device
-#  root_block_device {
-#    encrypted = true
-#  }
+ root_block_device {
+   encrypted = true
+ }
 
 }
